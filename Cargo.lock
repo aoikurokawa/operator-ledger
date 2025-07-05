@@ -855,6 +855,7 @@ dependencies = [
  "solana-account-info",
  "solana-decode-error",
  "solana-msg",
+ "solana-program-entrypoint",
  "solana-program-error",
  "solana-pubkey",
  "solana-rent",

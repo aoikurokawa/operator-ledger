@@ -9,6 +9,8 @@
 #### Accounts
 
 - Config
+- OperatorHistory
+- ClusterHistory (from stakenet)
 
 ### Operator Streward Program
 

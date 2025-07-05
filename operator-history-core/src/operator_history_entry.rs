@@ -13,8 +13,11 @@ pub struct OperatorHistotyEntry {
     /// Activated stake lamports
     activated_stake_lamports: PodU64,
 
-    /// Rank
+    /// Rank of opeator by stake amount
     rank: PodU32,
+
+    /// Operator fee BPS
+    operator_fee_bps: PodU16,
 
     /// Epoch
     epoch: PodU16,
@@ -34,6 +37,7 @@ impl Default for OperatorHistotyEntry {
         Self {
             activated_stake_lamports: PodU64::default(),
             rank: PodU32::default(),
+            operator_fee_bps: PodU16::default(),
             epoch: PodU16::default(),
             version: ClientVersion::default(),
             ip: [0; 4],
@@ -47,6 +51,7 @@ impl OperatorHistotyEntry {
     pub fn new(
         activated_stake_lamports: u64,
         rank: u32,
+        operator_fee_bps: u16,
         epoch: u16,
         version: ClientVersion,
         ip: [u8; 4],
@@ -54,6 +59,7 @@ impl OperatorHistotyEntry {
         Self {
             activated_stake_lamports: PodU64::from(activated_stake_lamports),
             rank: PodU32::from(rank),
+            operator_fee_bps: PodU16::from(operator_fee_bps),
             epoch: PodU16::from(epoch),
             version,
             ip,
@@ -71,18 +77,23 @@ impl OperatorHistotyEntry {
         self.rank.into()
     }
 
+    /// Rank
+    pub fn operator_fee_bps(&self) -> u16 {
+        self.operator_fee_bps.into()
+    }
+
     /// Epoch
     pub fn epoch(&self) -> u16 {
         self.epoch.into()
     }
 
     /// Version
-    pub fn version(&self) -> ClientVersion {
+    pub const fn version(&self) -> ClientVersion {
         self.version
     }
 
     /// IP address
-    pub fn address(&self) -> IpAddr {
+    pub const fn ip_address(&self) -> IpAddr {
         IpAddr::V4(Ipv4Addr::new(
             self.ip[0], self.ip[1], self.ip[2], self.ip[3],
         ))

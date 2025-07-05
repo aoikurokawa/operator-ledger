@@ -1,6 +1,9 @@
 use borsh::BorshDeserialize;
 use initialize_config::process_initialize_config;
 use operator_history_sdk::instruction::OperatorHistoryInstruction;
+// use solana_program::{declare_id, entrypoint::ProgramResult, msg, program_error::ProgramError, pubkey::Pubkey, account_info::AccountInfo};
+// #[cfg(not(feature = "no-entrypoint"))]
+// use solana_program::entrypoint;
 use solana_account_info::AccountInfo;
 use solana_msg::msg;
 use solana_program_error::{ProgramError, ProgramResult};
@@ -8,7 +11,10 @@ use solana_pubkey::Pubkey;
 
 mod initialize_config;
 
-solana_pubkey::declare_id!("SPoo1Ku8WFXoNDMHPsrGSTSG1Y47rzgn41SLUNakuHy");
+solana_pubkey::declare_id!(env!("OPERATOR_HISTORY_PROGRAM_ID"));
+
+#[cfg(not(feature = "no-entrypoint"))]
+solana_program_entrypoint::entrypoint!(process_instruction);
 
 pub fn process_instruction(
     program_id: &Pubkey,
